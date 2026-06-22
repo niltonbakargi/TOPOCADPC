@@ -51,11 +51,10 @@ def gerar_memorial(
 
     # ── Descrição do perímetro ─────────────────────────────────────────────────
     p0 = pontos[0]
-    linhas.append(
+    segmentos: List[str] = [
         f"Inicia-se a descrição deste perímetro no vértice {p0.id}, "
-        f"de coordenadas N {_fmt_coord(p0.y)} m e E {_fmt_coord(p0.x)} m."
-    )
-    linhas.append('')
+        f"de coordenadas N {_fmt_coord(p0.y)} m e E {_fmt_coord(p0.x)} m"
+    ]
 
     for i in range(n):
         p_atual = pontos[i]
@@ -77,11 +76,13 @@ def gerar_memorial(
         else:
             destino = f"o vértice inicial {p_prox.id}, fechando o perímetro"
 
-        linhas.append(
-            f"Deste, segue com {direcao_str} e distância de "
-            f"{dist:.2f} m, até {destino}."
+        segmentos.append(
+            f"deste, segue com {direcao_str} e distância de "
+            f"{dist:.2f} m, até {destino}"
         )
-        linhas.append('')
+
+    linhas.append(', '.join(segmentos) + '.')
+    linhas.append('')
 
     # ── Totais ────────────────────────────────────────────────────────────────
     linhas.append('=' * 70)
